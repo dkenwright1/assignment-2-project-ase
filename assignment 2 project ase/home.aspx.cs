@@ -78,5 +78,10 @@ namespace assignment_2_project_ase
 
             }
         }
+
+        protected void createbtn_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/create_user.aspx");
+        }
     }
 }

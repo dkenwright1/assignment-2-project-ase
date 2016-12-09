@@ -9,6 +9,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+    LOG IN
    <table>
         <tr>
             <td>enter username</td>
@@ -22,12 +23,20 @@
                 <asp:TextBox ID="txtpass" runat="server"></asp:TextBox>
             </td>
         </tr>
+        <tr>
         <td colspan = "2" align ="center">
             <asp:Button ID="loginbtn" runat="server" Text="log in" OnClick="loginbtn_Click" />
         </td>
         <td colspan = "2" align ="center">
             <asp:Button ID="clearbtn" runat="server" Text="clear" OnClick="clearbtn_Click" />
         </td>
+        </tr>
+        <tr>
+            <td>Not got an account?</td> 
+            <td>
+                <asp:Button ID="createbtn" runat="server" Text="Create user" OnClick="createbtn_Click" />
+            </td>
+        </tr>
     </table>
     </div>
     </form>
