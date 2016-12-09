@@ -83,5 +83,10 @@ namespace assignment_2_project_ase
         {
             Response.Redirect("~/create_user.aspx");
         }
+
+        protected void txtpass_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
