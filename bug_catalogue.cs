@@ -21,18 +21,21 @@ namespace logon
 
         private void bug_catalogue_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'user_DatabaseDataSet.error_code' table. You can move, or remove it, as needed.
-            this.error_codeTableAdapter.Fill(this.user_DatabaseDataSet.error_code);
+          
             label2.Text = DateTime.Now.ToString("MM/dd/yyyy hh:mmtt");
+            System.Data.OleDb.OleDbConnection connection = new System.Data.OleDb.OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=F:\ASD\ase 2\user Database.accdb");
+            connection.Open();
+            OleDbCommand command = new OleDbCommand("Select * from error_code ORDER BY ID", connection);
+            OleDbDataReader reader = command.ExecuteReader();
+            while (reader.Read())
+            {
+                comboBox1.Items.Add(reader[0]);
 
+            }
+          
         }
 
         private void comboBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
@@ -40,17 +43,18 @@ namespace logon
 
                 System.Data.OleDb.OleDbConnection connection = new System.Data.OleDb.OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=F:\ASD\ase 2\user Database.accdb");
                 connection.Open();
+                OleDbCommand command = new OleDbCommand("Select * from [error_code] WHERE ID = " + comboBox1.Text + " ORDER BY ID", connection);
+                OleDbDataReader reader2 = command.ExecuteReader();
 
 
-                OleDbCommand command = new OleDbCommand("Select * from error_code", connection);
-                OleDbDataReader reader = command.ExecuteReader();
-                while (reader.Read())
+
+                while (reader2.Read())
                 {
-                    string a = reader.GetString(1);
-                    string b = reader.GetString(2);
-                    string c = reader.GetString(3);
-                    DateTime d = reader.GetDateTime(4);
-                    string f = reader.GetString(5);
+                    string a = reader2.GetString(1);
+                    string b = reader2.GetString(2);
+                    string c = reader2.GetString(3);
+                    DateTime d = reader2.GetDateTime(4);
+                    string f = reader2.GetString(5);
 
                     user.Text = a;
                     language.Text = b;
@@ -59,14 +63,30 @@ namespace logon
                     file.Text = f;
 
                 }
-                reader.Close();
-            
-            
+
+                reader2.Dispose();
+
             }
-            catch  (Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show("Failed due to " + ex.Message);
             }
-      }
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void fillByToolStripButton_Click(object sender, EventArgs e)
+        {
+           
+
+        }
+
+        private void comboBox1_TabIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
